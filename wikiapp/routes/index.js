@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var path = require('path');
+var wikiArticle = require('./../models/wikiArticle.js');
 
 var index = {};
 

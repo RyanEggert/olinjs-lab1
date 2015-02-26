@@ -1,0 +1,10 @@
+<div class="jumbotron text-center">
+	<h1>Create New Wiki</h1>
+	
+	<form ng-submit="save()">
+		Title: <input id = "newTitle" type = "text" ng-model="playerTitle" name = "playerTitle"> <br>
+		Content: <input id = "newContent" type = "text" ng-model="playerContent" name = "playerContent"> <br>
+		<input type = "submit" action = "submit" value = "Create New">
+	</form>
+	<p>{{ message }}</p>
+</div>

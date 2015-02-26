@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var articleSchema = mongoose.Schema({
 	title: String,
-	content: [String]
+	content: String
 });
 
 module.exports = mongoose.model('article', articleSchema);

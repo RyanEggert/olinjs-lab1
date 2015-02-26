@@ -2,4 +2,12 @@
 	<h1>Home Page</h1>
 	
 	<p>{{ message }}</p>
+
+	<div id = "wikiList">
+	<h2>Articles </h2>
+		<div ng-repeat = "article in articles">
+			{{article.title}} <br>
+			{{article.author}}
+		</div>
+	</div>
 </div>
