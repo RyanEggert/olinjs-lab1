@@ -10,14 +10,18 @@ var mongoose = require('mongoose');
 
 var app = express();
 
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
-app.set('view engine', 'handlebars');
+// app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+// app.set('view engine', 'handlebars');
+
+// app.engine('html', require('ejs').renderFile);
+// app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// app.use("/views",  express.static(__dirname + '/public//views'));
 app.use(session({
 	secret: 'secret',
 	resave: false,
@@ -30,9 +34,10 @@ var PORT = process.env.PORT || 3000;
 var mongoURI = process.env.MONGOURI || 'mongodb://localhost/test';
 mongoose.connect(mongoURI);
 
-app.get('/', index.home);
+app.get('*', index.home);
+// app.get('/*', index.home);
 
-app.get('/newWiki', index.newWiki);
+// app.get('/newWiki', index.newWiki);
 
 
 
