@@ -14,19 +14,22 @@
 	<nav id = "navbar">
 	<div class="navbar-header">
             <a class="navbar-brand" href="#/">Home</a>
-            <a class="navbar-brand" href="#/newWiki">About</a>
+            <a class="navbar-brand" href="#/newWiki">CreateNew</a>
     </div>
 
 	<h2>Search</h2>
 	<form id = "search" action = "search" >
 		<input type = "text" ng-model="playerName" name = "playerName">
 		<input type = "submit" value = "Search">
-	<p ng-bind="playerName"></p>
+	<!-- <p ng-bind="playerName"></p> -->
+
+
 	</form>
 	</nav>
 
 <body ng-controller="mainController">
     <div ng-view></div>
+
 YOOO
 
 </body>

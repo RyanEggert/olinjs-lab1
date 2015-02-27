@@ -10,11 +10,8 @@ var mongoose = require('mongoose');
 
 var app = express();
 
-// app.engine('handlebars', exphbs({defaultLayout: 'main'}));
-// app.set('view engine', 'handlebars');
+var router = express.Router();
 
-// app.engine('html', require('ejs').renderFile);
-// app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -34,11 +31,14 @@ var PORT = process.env.PORT || 3000;
 var mongoURI = process.env.MONGOURI || 'mongodb://localhost/test';
 mongoose.connect(mongoURI);
 
+
+
+// app.use('/api', router)
+app.get('/api/test', index.apitest);
+
+app.post('/api/createWiki', index.createWiki);
+
 app.get('*', index.home);
-// app.get('/*', index.home);
-
-// app.get('/newWiki', index.newWiki);
-
 
 
 app.listen(PORT, function() {
