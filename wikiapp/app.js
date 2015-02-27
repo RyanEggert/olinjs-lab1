@@ -39,6 +39,7 @@ app.get('/api/wikis', index.getWikis);
 
 app.post('/api/createWiki', index.createWiki);
 app.post('/api/getPlayer', index.getPlayer);
+app.post('/api/editWiki', index.editWiki)
 app.get('*', index.home);
 
 

@@ -37,11 +37,23 @@ index.getWikis = function(req, res){
 index.getPlayer = function(req, res){
 	console.log(req.body);
 
-	wikiArticle.find({title: req.body.title}, function(err, wikis){
+	wikiArticle.findOne({title: req.body.title}, function(err, wiki){
 		if(err){
 			console.log(err);
 		}
-		res.json(wikis[0])
+		res.json(wiki)
+	});
+};
+
+index.editWiki = function(req, res){
+	console.log(req.body);
+	newWiki = req.body;
+
+	wikiArticle.update({title: newWiki.title}, newWiki, function(err, wiki){
+		if(err){
+			console.log(err);
+		}
+		res.json(wiki)
 	});
 };
 

@@ -16,7 +16,7 @@ myApp.config(function($routeProvider) {
              controller  : 'newWikiController'
          })
 
-         .when('/playerWiki', {
+         .when('/playerWiki/', {
              templateUrl : 'views/wiki.html',
              controller  : 'pageController'
          })
@@ -35,7 +35,7 @@ myApp.controller('mainController', function($scope, $http, $location) {
                 alert("worked");
                 found = true;
 
-                $location.path("/playerWiki");
+                $location.path("/playerWiki/");
 
             }
         })
@@ -92,11 +92,10 @@ myApp.controller('newWikiController', function($scope, $http, $location) {
 
 });
 
-myApp.controller('pageController', function($scope, $http) {
+myApp.controller('pageController', function($scope, $http, $location) {
     $scope.message = 'Player page';
+    $scope.edit = true;
     console.log("inside page",$scope.articles);
-
-    
 
     $http.post("/api/getPlayer", {title: $scope.playerName})
     .success(function(data, status, headers, config) {
@@ -105,14 +104,37 @@ myApp.controller('pageController', function($scope, $http) {
 
         $scope.wikiTitle = data.title;
         $scope.wikiContent = data.content;
-
     }).
       error(function(data, status, headers, config) {
         console.log("data", data);
         console.log("status", status);
-
     });
 
-    
+    $scope.editPage = function(){
+        $scope.edit = false;
+        $scope.editplayerTitle = $scope.wikiTitle
+        $scope.editplayerContent = $scope.wikiContent
+    }
 
+    $scope.sumbitEdits = function(){
+        $http.post("/api/editWiki", {
+            title: $scope.editplayerTitle,
+            content: $scope.editplayerContent
+        })
+        .success(function(data, status, headers, config) {
+            console.log("data", data);
+            console.log("status", status);
+
+            // $location.path("/playerWiki/");
+            $scope.edit = true;
+            $scope.wikiTitle =$scope.editplayerTitle;
+            $scope.wikiContent = $scope.editplayerContent;
+
+
+        }).
+          error(function(data, status, headers, config) {
+            console.log("data", data);
+            console.log("status", status);
+        });
+    }
 });
