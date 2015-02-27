@@ -80,7 +80,7 @@ myApp.controller('newWikiController', function($scope, $http, $location) {
         .success(function(data, status, headers, config) {
         	console.log("data", data);
         	console.log("status", status);
-            $location.path("/playerWiki");
+            $location.path("/");
 
           }).
           error(function(data, status, headers, config) {
