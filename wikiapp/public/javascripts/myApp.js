@@ -24,15 +24,26 @@ myApp.controller('mainController', function($scope, $http) {
     // debugger;
 
 
-    $scope.message = 'Everyone come and see how good I look!';
+    $scope.message = 'Home page';
      // place holder for mongo data
-    $scope.articles = [
-       {title: 'post 1', author: 5},
-       {title: 'post 2', author: 2},
-       {title: 'post 3', author: 15},
-       {title: 'post 4', author: 9},
-       {title: 'post 5', author: 4}
-    ];
+    $scope.getWiki = function(){ 
+        // alert("yo")
+
+        $http.get("/api/wikis")
+        .success(function(data, status, headers, config) {
+            console.log("data", data);
+            console.log("status", status);
+            $scope.articles = data;
+
+          }).
+          error(function(data, status, headers, config) {
+            console.log("data", data);
+            console.log("status", status);
+
+          });
+    }
+    $scope.getWiki()
+
 });
 
 myApp.controller('newWikiController', function($scope, $http) {

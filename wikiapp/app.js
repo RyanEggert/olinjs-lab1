@@ -35,6 +35,7 @@ mongoose.connect(mongoURI);
 
 // app.use('/api', router)
 app.get('/api/test', index.apitest);
+app.get('/api/wikis', index.getWikis);
 
 app.post('/api/createWiki', index.createWiki);
 

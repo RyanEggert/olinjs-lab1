@@ -24,5 +24,15 @@ index.createWiki = function(req, res){
 	})
 };
 
+index.getWikis = function(req, res){
+
+	wikiArticle.find(function(err, wikis){
+		if(err){
+			console.log(err);
+		}
+		res.json(wikis)
+	});
+};
+
 module.exports = index;
 
