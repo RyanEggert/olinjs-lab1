@@ -15,14 +15,34 @@ myApp.config(function($routeProvider) {
              templateUrl : 'views/newWiki.html',
              controller  : 'newWikiController'
          })
+
+         .when('/playerWiki', {
+             templateUrl : 'views/wiki.html',
+             controller  : 'pageController'
+         })
  });
 
  // create the controller and inject Angular's $scope
-myApp.controller('mainController', function($scope, $http) {
+myApp.controller('mainController', function($scope, $http, $location) {
      // create a message to display in our view
-    $scope.playerName = "Michael Jordan";
-    // debugger;
+    // $scope.playerName = "Michael Jordan";
+    $scope.search = function(){
+        alert("search");
+        var found = false;
+        $scope.articles.forEach(function(currentValue, index, array){
+            if($scope.playerName == currentValue.title){
+                console.log($scope.playerName + " exists");
+                alert("worked");
+                found = true;
 
+                $location.path("/playerWiki");
+
+            }
+        })
+        if(!found){
+            alert("player wasnt found");
+        }
+    };
 
     $scope.message = 'Home page';
      // place holder for mongo data
@@ -42,11 +62,11 @@ myApp.controller('mainController', function($scope, $http) {
 
           });
     }
-    $scope.getWiki()
+    $scope.getWiki()        
 
 });
 
-myApp.controller('newWikiController', function($scope, $http) {
+myApp.controller('newWikiController', function($scope, $http, $location) {
     $scope.message = 'Creating new wiki.';
      // $scope.playerTitle
     $scope.sumbitNew = function(){ 
@@ -60,6 +80,7 @@ myApp.controller('newWikiController', function($scope, $http) {
         .success(function(data, status, headers, config) {
         	console.log("data", data);
         	console.log("status", status);
+            $location.path("/playerWiki");
 
           }).
           error(function(data, status, headers, config) {
@@ -71,8 +92,27 @@ myApp.controller('newWikiController', function($scope, $http) {
 
 });
 
+myApp.controller('pageController', function($scope, $http) {
+    $scope.message = 'Player page';
+    console.log("inside page",$scope.articles);
 
-    // app.controller("controller", function($scope) {
-//     $scope.playerName = "Michael Jordan";
+    
 
-// })
+    $http.post("/api/getPlayer", {title: $scope.playerName})
+    .success(function(data, status, headers, config) {
+        console.log("data", data);
+        console.log("status", status);
+
+        $scope.wikiTitle = data.title;
+        $scope.wikiContent = data.content;
+
+    }).
+      error(function(data, status, headers, config) {
+        console.log("data", data);
+        console.log("status", status);
+
+    });
+
+    
+
+});

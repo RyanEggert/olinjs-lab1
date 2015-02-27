@@ -18,11 +18,10 @@
     </div>
 
 	<h2>Search</h2>
-	<form id = "search" action = "search" >
+	<form id = "search" ng-submit="search()" >
 		<input type = "text" ng-model="playerName" name = "playerName">
 		<input type = "submit" value = "Search">
-	<!-- <p ng-bind="playerName"></p> -->
-
+	<p ng-bind="playerName"></p>
 
 	</form>
 	</nav>

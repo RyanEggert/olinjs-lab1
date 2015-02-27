@@ -34,5 +34,17 @@ index.getWikis = function(req, res){
 	});
 };
 
+index.getPlayer = function(req, res){
+	console.log(req.body);
+
+	wikiArticle.find({title: req.body.title}, function(err, wikis){
+		if(err){
+			console.log(err);
+		}
+		res.json(wikis[0])
+	});
+};
+
+
 module.exports = index;
 
