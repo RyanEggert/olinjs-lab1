@@ -1,0 +1,25 @@
+<div class="jumbotron text-center">
+	<h1>Player Wiki</h1>
+	
+	<p>{{ message }}</p>
+<!-- Click me: <input type="checkbox" ng-model="checked"><br/>	 -->
+	
+	<div class = "playerWiki" ng-show = "edit">
+	<h2>{{wikiTitle}} </h2>
+	
+		<div>
+			{{wikiContent}}
+		</div>
+
+	</div>
+	<div class = "editPart" ng-hide= "edit" >
+		<form ng-submit="sumbitEdits()">
+			Title: <input id = "newTitle" type = "text" ng-model="editplayerTitle" name = "editplayerTitle"> <br>
+			Content: <input id = "newContent" type = "text" ng-model="editplayerContent" name = "editplayerContent"> <br>
+			<input type = "submit" action = "submit" value = "Edit">
+			<!-- <button ng-click="sumbitNew()">Create New</button> -->
+		</form>
+	</div>
+	<button ng-click="editPage()" ng-show = "edit">Edit Page</button>
+
+</div>

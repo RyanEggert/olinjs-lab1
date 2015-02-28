@@ -1,0 +1,14 @@
+<div class="jumbotron text-center">
+    <h1>Create New Wiki</h1>
+
+    <form ng-submit="sumbitNew()">
+        Title:
+        <input id="newTitle" type="text" ng-model="playerTitle" name="playerTitle">
+        <br> Content:
+        <textarea id="newContent" ng-model="playerContent" name="playerContent"> </textarea>
+        <br>
+        <input type="submit" action="submit" value="Create New">
+        <!-- <button ng-click="sumbitNew()">Create New</button> -->
+    </form>
+    <p>{{ message }}</p>
+</div>
