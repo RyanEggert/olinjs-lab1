@@ -16,7 +16,7 @@ myApp.config(function($routeProvider) {
              controller  : 'newWikiController'
          })
 
-         .when('/playerWiki/', {
+         .when('/playerWiki/:id', {
              templateUrl : 'views/wiki.html',
              controller  : 'pageController'
          })
@@ -27,7 +27,6 @@ myApp.controller('mainController', function($scope, $http, $location) {
      // create a message to display in our view
     // $scope.playerName = "Michael Jordan";
     $scope.search = function(){
-        alert("search");
         var found = false;
         $scope.articles.forEach(function(currentValue, index, array){
             if($scope.playerName == currentValue.title){
@@ -35,7 +34,7 @@ myApp.controller('mainController', function($scope, $http, $location) {
                 alert("worked");
                 found = true;
 
-                $location.path("/playerWiki/");
+                $location.path("/playerWiki/" +$scope.playerName);
 
             }
         })
@@ -92,12 +91,23 @@ myApp.controller('newWikiController', function($scope, $http, $location) {
 
 });
 
-myApp.controller('pageController', function($scope, $http, $location) {
+myApp.controller('pageController', function($scope, $http, $location, $routeParams) {
     $scope.message = 'Player page';
     $scope.edit = true;
     console.log("inside page",$scope.articles);
+    $scope.$routeParams = $routeParams;
+    console.log("param id", $routeParams.id);
+    var playerName;
 
-    $http.post("/api/getPlayer", {title: $scope.playerName})
+    if($scope.playerName){
+        playerName = $scope.playerName;
+        console.log("searching");
+    }else{
+        playerName = $routeParams.id;
+        console.log("linking");
+    }
+
+    $http.post("/api/getPlayer", {title: playerName})
     .success(function(data, status, headers, config) {
         console.log("data", data);
         console.log("status", status);

@@ -6,7 +6,9 @@
 	<div id = "wikiList">
 	<h2>Articles </h2>
 		<div ng-repeat = "article in articles">
-			{{article.title}} <br>
+			<a href = "#/playerWiki/{{article.title}}">
+			{{article.title}} 
+			</a> <br>
 		</div>
 	</div>
 </div>
