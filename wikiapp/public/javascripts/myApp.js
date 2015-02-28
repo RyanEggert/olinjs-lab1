@@ -1,7 +1,8 @@
-var myApp = angular.module("myApp", ['ngRoute']);
+var myApp = angular.module('myApp', ['ngRoute']);
 
 
 myApp.config(function($routeProvider) {
+
      $routeProvider
 
          // route for the home page
@@ -43,52 +44,50 @@ myApp.controller('mainController', function($scope, $http, $location) {
         }
     };
 
-    $scope.message = 'Home page';
-     // place holder for mongo data
-    $scope.getWiki = function(){ 
-        // alert("yo")
+  $scope.message = 'Home page';
+  // place holder for mongo data
+  $scope.getWiki = function() {
+    // alert("yo")
 
-        $http.get("/api/wikis")
-        .success(function(data, status, headers, config) {
-            console.log("data", data);
-            console.log("status", status);
-            $scope.articles = data;
+    $http.get('/api/wikis')
+      .success(function(data, status, headers, config) {
+        console.log('data', data);
+        console.log('status', status);
+        $scope.articles = data;
 
-          }).
-          error(function(data, status, headers, config) {
-            console.log("data", data);
-            console.log("status", status);
+      }).
+    error(function(data, status, headers, config) {
+      console.log('data', data);
+      console.log('status', status);
 
-          });
-    }
-    $scope.getWiki()        
-
+    });
+  };
+  $scope.getWiki();
 });
 
 myApp.controller('newWikiController', function($scope, $http, $location) {
-    $scope.message = 'Creating new wiki.';
-     // $scope.playerTitle
-    $scope.sumbitNew = function(){ 
-        // alert("yo");
-        var formData = {
-         	title : $scope.playerTitle,
-        	content: $scope.playerContent
-        };
+  $scope.message = 'Creating new wiki.';
+  // $scope.playerTitle
+  $scope.sumbitNew = function() {
+    // alert("yo");
+    var formData = {
+      title: $scope.playerTitle,
+      content: $scope.playerContent
+    };
 
-        $http.post("/api/createWiki", formData)
-        .success(function(data, status, headers, config) {
-        	console.log("data", data);
-        	console.log("status", status);
-            $location.path("/");
+    $http.post("/api/createWiki", formData)
+      .success(function(data, status, headers, config) {
+        console.log('data', data);
+        console.log('status', status);
+        $location.path('/');
 
-          }).
-          error(function(data, status, headers, config) {
-          	console.log("data", data);
-        	console.log("status", status);
+      }).
+    error(function(data, status, headers, config) {
+      console.log("data", data);
+      console.log("status", status);
 
-          });
-    }
-
+    });
+  }
 });
 
 myApp.controller('pageController', function($scope, $http, $location, $routeParams) {
@@ -108,43 +107,44 @@ myApp.controller('pageController', function($scope, $http, $location, $routePara
     }
 
     $http.post("/api/getPlayer", {title: playerName})
+
     .success(function(data, status, headers, config) {
-        console.log("data", data);
-        console.log("status", status);
+      console.log("data", data);
+      console.log("status", status);
 
-        $scope.wikiTitle = data.title;
-        $scope.wikiContent = data.content;
+      $scope.wikiTitle = data.title;
+      $scope.wikiContent = data.content;
     }).
-      error(function(data, status, headers, config) {
+  error(function(data, status, headers, config) {
+    console.log("data", data);
+    console.log("status", status);
+  });
+
+  $scope.editPage = function() {
+    $scope.edit = false;
+    $scope.editplayerTitle = $scope.wikiTitle
+    $scope.editplayerContent = $scope.wikiContent
+  }
+
+  $scope.sumbitEdits = function() {
+    $http.post("/api/editWiki", {
+        title: $scope.editplayerTitle,
+        content: $scope.editplayerContent
+      })
+      .success(function(data, status, headers, config) {
         console.log("data", data);
         console.log("status", status);
+
+        // $location.path("/playerWiki/");
+        $scope.edit = true;
+        $scope.wikiTitle = $scope.editplayerTitle;
+        $scope.wikiContent = $scope.editplayerContent;
+
+
+      }).
+    error(function(data, status, headers, config) {
+      console.log("data", data);
+      console.log("status", status);
     });
-
-    $scope.editPage = function(){
-        $scope.edit = false;
-        $scope.editplayerTitle = $scope.wikiTitle
-        $scope.editplayerContent = $scope.wikiContent
-    }
-
-    $scope.sumbitEdits = function(){
-        $http.post("/api/editWiki", {
-            title: $scope.editplayerTitle,
-            content: $scope.editplayerContent
-        })
-        .success(function(data, status, headers, config) {
-            console.log("data", data);
-            console.log("status", status);
-
-            // $location.path("/playerWiki/");
-            $scope.edit = true;
-            $scope.wikiTitle =$scope.editplayerTitle;
-            $scope.wikiContent = $scope.editplayerContent;
-
-
-        }).
-          error(function(data, status, headers, config) {
-            console.log("data", data);
-            console.log("status", status);
-        });
-    }
+  }
 });
