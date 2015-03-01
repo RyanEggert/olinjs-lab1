@@ -1,6 +1,7 @@
 ## To-dos
 
 - [x] Learn to make markdown task lists
+- [ ] Right now, we cannot change article title from the "edit" page. 
 - [ ] When searching, get only titles back from db.
 - [ ] Make article titles NOT case sensitive.
 - [ ] Erase search bar after search, etc.
