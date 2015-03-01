@@ -16,13 +16,13 @@
         </div>
     </div>
     <div class="col-lg-8">
-        <div class="well" ng-hide="edit">
+        <div class="well editPart" ng-hide="edit">
             <h1>Edit Article</h1>
             <form class="form-horizontal" ng-submit="sumbitEdits()">
                 <div class="form-group">
                     <label class="col-lg-2 control-label">Title</label>
                     <div class="col-lg-10">
-                        <input id="newTitle" type="text" ng-model="editplayerTitle" name="editplayerTitle" class="form-control">
+                        <input required id="newTitle" type="text" ng-model="editplayerTitle" name="editplayerTitle" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
