@@ -18,3 +18,7 @@ div.well#articleslist {
 div.colwrapper {} div.container-main {
     width: 88vw;
 }
+
+button#editpage {
+  float: right;
+}
