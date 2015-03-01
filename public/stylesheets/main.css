@@ -1,6 +1,4 @@
 body {
-	font-family: 'Open Sans', sans-serif;
-	font-size: 18px;
   padding-top: 70px;
 }
 
@@ -30,12 +28,7 @@ div#authorsList{
 
 }
 
-nav#navbar{
-	background-color:#CCFFCC;
-    color:#827FF7;
-    text-align:left;
-    padding:5px;
-}
+
 #newTitle{
 	padding:10px;
 	width:400px;
