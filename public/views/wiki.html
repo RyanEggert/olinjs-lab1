@@ -1,24 +1,8 @@
 <div class="row">
     <div class="col-lg-8">
-        <div class="well" ng-show="edit">
-            <button id="editpage" class="btn btn-fab btn-raised btn-material-blue-grey-400" ng-click="editPage()" ng-show="edit"><i class="mdi-image-edit"></i>
-            </button>
-            <h1>{{wikiTitle}}</h1>
-            <p>{{wikiContent}}</p>
-
-        </div>
-    </div>
-    <div class="col-lg-4">
-        <div class="well" id="articleslist" data-spy="affix" data-offset-top="70">
-            <h1>Articles </h1>
-            <div ng-repeat="article in articles"><a class="btn btn-default" href="#/playerWiki/{{article.title}}">{{article.title}}</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-8">
         <div class="well editPart" ng-hide="edit">
             <h1>Edit Article</h1>
-            <form class="form-horizontal" ng-submit="sumbitEdits()">
+            <form class="form-horizontal" ng-submit="submitEdits()">
                 <div class="form-group">
                     <label class="col-lg-2 control-label">Title</label>
                     <div class="col-lg-10">
@@ -42,6 +26,23 @@
             </form>
         </div>
     </div>
+    <div class="col-lg-8">
+        <div class="well" ng-show="edit">
+            <button id="editpage" class="btn btn-fab btn-raised btn-material-blue-grey-400" ng-click="editPage()" ng-show="edit"><i class="mdi-image-edit"></i>
+            </button>
+            <h1>{{wikiTitle}}</h1>
+            <p>{{wikiContent}}</p>
+
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="well" id="articleslist" data-spy="affix" data-offset-top="70">
+            <h1>Articles </h1>
+            <div ng-repeat="article in articles"><a class="btn btn-default" href="#/playerWiki/{{article.title}}">{{article.title}}</a>
+            </div>
+        </div>
+    </div>
+
 
 
 </div>
