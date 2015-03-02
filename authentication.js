@@ -1,7 +1,7 @@
-var passport = require('passport')
+var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var twoteUser = require('./models/twoteUser.js');
-var config = require('./oauth.js')
+var config = require('./oauth.js');
 
 module.exports = passport.use(new FacebookStrategy({
   clientID: config.facebook.clientID,
@@ -16,19 +16,19 @@ twoteUser.findOne({ oauthID: profile.id }, function(err, user) {
     done(null, user);
   } else {
    var user = new twoteUser({
-    oauthID: profile.id, 
+    oauthID: profile.id,
     userName: profile.displayName
     });
-   
+
    user.save(function(err) {
         if(err) {
           console.log(err);
              } else {
                     console.log("saving user ...");
                     done(null, user);
-              };
+              }
       });
-  };
+  }
   });
   }
 ));
