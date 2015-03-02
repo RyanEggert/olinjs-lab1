@@ -27,10 +27,7 @@ index.createWiki = function (req, res) {
 };
 
 index.getWikis = function (req, res) {
-  wikiArticle.find({})
-    .sort({
-      title: 1
-    })
+  wikiArticle.distinct("title")
     .exec(function (err, wikis) {
       if (err) {
         console.log(err);
@@ -43,7 +40,7 @@ index.getPlayer = function (req, res) {
   console.log(req.body);
 
   wikiArticle.findOne({
-    title: req.body.title
+    title:  { $regex : new RegExp(req.body.title, "i") }
   }, function (err, wiki) {
     if (err) {
       console.log(err);

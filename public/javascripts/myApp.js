@@ -30,9 +30,8 @@ myApp.controller('mainController', function($scope, $http, $location) {
     $scope.search = function(){
         var found = false;
         $scope.articles.forEach(function(currentValue, index, array){
-            if($scope.playerName == currentValue.title){
+            if($scope.playerName.toLowerCase() == String(currentValue).toLowerCase()){
                 console.log($scope.playerName + " exists");
-                alert("worked");
                 found = true;
 
                 $location.path("/playerWiki/" +$scope.playerName);
@@ -40,8 +39,11 @@ myApp.controller('mainController', function($scope, $http, $location) {
             }
         })
         if(!found){
-            alert("player wasnt found");
+            alert("player wasnt found, create player's wiki?");
+            $location.path("/newWiki");
+            $scope.playerTitle = $scope.playerName;
         }
+        $scope.playerName = null;
     };
 
   $scope.message = 'Home page';
@@ -74,19 +76,34 @@ myApp.controller('newWikiController', function($scope, $http, $location) {
       title: $scope.playerTitle,
       content: $scope.playerContent
     };
+    var found1 = false;
+    $scope.articles.forEach(function(currentValue, index, array){
+        if($scope.playerTitle.toLowerCase() == String(currentValue).toLowerCase()){
+            console.log($scope.playerName + " exists");
+            alert("the player that you are trying to create already exists");
+            found1 = true;
 
-    $http.post("/api/createWiki", formData)
-      .success(function(data, status, headers, config) {
-        console.log('data', data);
-        console.log('status', status);
-        $location.path('/');
+            $location.path("/playerWiki/" +$scope.playerTitle);
 
-      }).
-    error(function(data, status, headers, config) {
-      console.log("data", data);
-      console.log("status", status);
+        }
+    })
+    if(!found1){
+        $http.post("/api/createWiki", formData)
+          .success(function(data, status, headers, config) {
+            console.log('data', data);
+            console.log('status', status);
+            $location.path('/');
 
-    });
+          }).
+        error(function(data, status, headers, config) {
+          console.log("data", data);
+          console.log("status", status);
+
+        });
+
+    }
+
+
   }
 });
 
