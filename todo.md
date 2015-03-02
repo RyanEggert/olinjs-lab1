@@ -9,4 +9,4 @@
 - [ ] When typing in title of new wiki, check list of titles. Offer a link to existing article.
 - [x] Add textarea to edit page
 - [x] Reformat site (look into material design)
-- [ ] Make API more RESTful
+- [x] Make API more RESTful
