@@ -12,37 +12,31 @@ var app = express();
 
 var router = express.Router();
 
-
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 // app.use("/views",  express.static(__dirname + '/public//views'));
 app.use(session({
-	secret: 'secret',
-	resave: false,
-	saveUninitialized: true
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: true
 }));
-
-
 
 var PORT = process.env.PORT || 3000;
 var mongoURI = process.env.MONGOURI || 'mongodb://localhost/test';
 mongoose.connect(mongoURI);
 
-
-
-// app.use('/api', router)
 app.get('/api/test', index.apitest);
 app.get('/api/wikis', index.getWikis);
-
-app.post('/api/createWiki', index.createWiki);
-app.post('/api/getPlayer', index.getPlayer);
-app.post('/api/editWiki', index.editWiki);
+app.post('/api/wikis', index.createWiki);
+app.post('/api/wikis/edit', index.editWiki);
+app.post('/api/wikis/wiki', index.getPlayer);
 app.get('*', index.home);
 
-
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log("Application running on port:", PORT);
 });
