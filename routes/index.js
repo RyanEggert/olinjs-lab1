@@ -18,7 +18,6 @@ index.apitest = function (req, res) {
 
 // create a new article
 index.createWiki = function (req, res) {
-  console.log(req.body);
   var wiki = req.body;
   var newWiki = new wikiArticle(wiki);
   newWiki.save(function (err) {
@@ -42,10 +41,11 @@ index.getWikis = function (req, res) {
 
 // find a specific article
 index.getPlayer = function (req, res) {
-  console.log(req.body);
 
   wikiArticle.findOne({
-    title:  { $regex : new RegExp(req.body.title, "i") }
+    title: {
+      $regex: new RegExp(req.body.title, "i")
+    }
   }, function (err, wiki) {
     if (err) {
       console.log(err);
@@ -56,7 +56,6 @@ index.getPlayer = function (req, res) {
 
 // store revised article
 index.editWiki = function (req, res) {
-  console.log(req.body);
   newWiki = req.body;
 
   wikiArticle.update({
@@ -68,6 +67,5 @@ index.editWiki = function (req, res) {
     res.json(wiki);
   });
 };
-
 
 module.exports = index;
