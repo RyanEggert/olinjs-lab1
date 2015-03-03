@@ -4,16 +4,19 @@ var wikiArticle = require('./../models/wikiArticle.js');
 
 var index = {};
 
+// main page
 index.home = function (req, res) {
   res.sendfile('./public/views/index.html');
 };
 
+// recieve a greeting from our site
 index.apitest = function (req, res) {
   res.json({
     "message": "what is up"
   });
 };
 
+// create a new article
 index.createWiki = function (req, res) {
   console.log(req.body);
   var wiki = req.body;
@@ -26,6 +29,7 @@ index.createWiki = function (req, res) {
   });
 };
 
+// get all articles
 index.getWikis = function (req, res) {
   wikiArticle.distinct("title")
     .exec(function (err, wikis) {
@@ -36,6 +40,7 @@ index.getWikis = function (req, res) {
     });
 };
 
+// find a specific article
 index.getPlayer = function (req, res) {
   console.log(req.body);
 
@@ -49,6 +54,7 @@ index.getPlayer = function (req, res) {
   });
 };
 
+// store revised article
 index.editWiki = function (req, res) {
   console.log(req.body);
   newWiki = req.body;
